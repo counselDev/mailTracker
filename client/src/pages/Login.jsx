@@ -44,8 +44,8 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-1/4">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-100 px-2">
+      <div className="w-full lg:w-1/4">
         <h3 className="mb-5 text-2xl font-semibold  text-gray-500 text-center">
           Welcome Back!
         </h3>
