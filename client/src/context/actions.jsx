@@ -1,0 +1,13 @@
+export const LOGIN = "LOGIN";
+export const REGISTER = "REGISTER";
+export const LOGOUT = "LOGOUT";
+export const SET_ERROR = "SET_ERROR";
+export const SET_SUCCESS = "SET_SUCCESS";
+export const FETCH_START = "FETCH_START";
+export const FETCH_STOP = "FETCH_STOP";
+export const INIT_STATE = "INIT_STATE";
+export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+export const SET_STATS = "SET_STATS";
+export const SET_RECIPIENT_MSG = "SET_RECIPIENT_MSG";
+export const SET_STAFFS = "SET_STAFFS";
+export const HANDLE_CHANGE = "HANDLE_CHANGE";
