@@ -12,7 +12,7 @@
     "start-server": "node server --ignore client",
     "client": "npm run dev --prefix client",
     "start": "concurrently --kill-others-on-fail \" npm run server \" \" npm run client",
-    "start-production": "concurrently --kill-others-on-fail \" npm run start-server \" \" npm run client\"",
+    "start-production": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Counsel",
