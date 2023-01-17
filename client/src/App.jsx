@@ -14,6 +14,7 @@ import { useAppContext } from "./context/AppContext";
 import { useEffect } from "react";
 import Inbox from "./pages/Inbox";
 import MobileNav from "./components/sidebar/MobileNav";
+import RegisterStaff from "./pages/RegisterStaff";
 
 function App() {
   const { user, handleFieldChange, getApplicationToUser } = useAppContext();
@@ -76,6 +77,7 @@ function App() {
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/register/staff" element={<RegisterStaff />} />
       </Routes>
     </BrowserRouter>
   );

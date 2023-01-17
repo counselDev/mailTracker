@@ -4,23 +4,21 @@ import { Link, useNavigate } from "react-router-dom";
 import * as ACTIONS from "../context/actions";
 
 const initState = {
-  firstname: "",
-  lastname: "",
-  gender: "",
-  phone: "",
+  fullname: "",
+  course: "",
   password: "",
   department: "",
-  regNum: "",
-  entryYear: "",
   email: "",
+  role: "",
+  courseAdvisorFor: "",
 };
 
-const Register = () => {
+const RegisterStaff = () => {
   const {
     dispatch,
-    whoIsLogging,
+    register,
     clearMessage,
-    registerStudent,
+    whoIsLogging,
     errorMessage,
   } = useAppContext();
   const [input, setInput] = useState(initState);
@@ -35,29 +33,9 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {
-        firstname,
-        lastname,
-        gender,
-        phone,
-        password,
-        department,
-        regNum,
-        entryYear,
-        email,
-      } = input;
+      const { fullname, course, password, department, email, role } = input;
 
-      if (
-        !firstname ||
-        !lastname ||
-        !gender ||
-        !phone ||
-        !password ||
-        !department ||
-        !regNum ||
-        !entryYear ||
-        !email
-      ) {
+      if (!fullname || !course || !department || !password || !email || !role) {
         dispatch({
           type: ACTIONS.SET_ERROR,
           payload: { msg: "Please input all Fields" },
@@ -65,11 +43,10 @@ const Register = () => {
         return;
       }
 
-      const res = await registerStudent(input);
-
+      await register(input);
       setInput(initState);
 
-      navigate("/login?type=student");
+      navigate("/login?type=staff");
     } catch (error) {
       console.log(error);
       dispatch({
@@ -116,33 +93,33 @@ const Register = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="fullname"
               >
-                First Name
+                Full Name
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="firstname"
+                id="fullname"
                 type="text"
-                name="firstname"
-                placeholder="firstname"
-                value={input.firstname}
+                name="fullname"
+                placeholder="fullname"
+                value={input.fullname}
                 onChange={handleInputChange}
               />
             </div>
             <div className="mb-4 w-full">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="lastname"
+                htmlFor="course"
               >
-                Last Name
+                Course
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="lastname"
+                id="course"
                 type="text"
-                name="lastname"
-                value={input.lastname}
+                name="course"
+                value={input.course}
                 onChange={handleInputChange}
-                placeholder="Last Name"
+                placeholder="Course"
               />
             </div>
           </div>
@@ -151,18 +128,18 @@ const Register = () => {
             <div className="mb-4 w-full">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="phone"
+                htmlFor="department"
               >
-                Phone
+                Department
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="phone"
+                id="department"
                 type="text"
-                name="phone"
-                value={input.phone}
+                name="department"
+                value={input.department}
                 onChange={handleInputChange}
-                placeholder="Phone Number"
+                placeholder="Department"
               />
             </div>
             <div className="mb-4 w-full">
@@ -207,83 +184,45 @@ const Register = () => {
             </div>
             <div className="mb-4 w-full">
               <label
-                htmlFor="gender"
+                htmlFor="role"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Gender
+                Role
               </label>
               <select
-                id="gender"
-                name="gender"
-                autoComplete="gender"
-                value={input.gender}
+                id="role"
+                name="role"
+                autoComplete="role"
+                value={input.role}
                 onChange={handleInputChange}
                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Femaie</option>
+                <option value="">Select Role</option>
+                <option value="hod">HOD</option>
+                <option value="lecturer">Lecturer</option>
               </select>
-            </div>
-          </div>
-
-          <div className="flex gap-4 items-center justify-center">
-            <div className="mb-4 w-full">
-              <label
-                htmlFor="department"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Department
-              </label>
-              <input
-                id="department"
-                type="text"
-                name="department"
-                value={input.department}
-                onChange={handleInputChange}
-                autoComplete="department"
-                placeholder="your department"
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div className="mb-4 w-full">
-              <label
-                htmlFor="regNum"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Reg Number
-              </label>
-              <input
-                id="regNum"
-                type="text"
-                name="regNum"
-                value={input.regNum}
-                onChange={handleInputChange}
-                autoComplete="regNum"
-                placeholder="your regNum"
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              />
             </div>
           </div>
 
           <div className="mb-4 w-full">
             <label
-              htmlFor="entryYear"
+              htmlFor="courseAdvisorFor"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Entry Year
+              Course Advisor For
             </label>
             <input
-              id="entryYear"
+              id="courseAdvisorFor"
               type="text"
-              name="entryYear"
-              value={input.entryYear}
+              name="courseAdvisorFor"
+              value={input.courseAdvisorFor}
               onChange={handleInputChange}
-              autoComplete="entryYear"
-              placeholder="your entryYear"
+              autoComplete="courseAdvisorFor"
+              placeholder="your courseAdvisorFor"
               className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             />
           </div>
+
           <div className="flex items-center justify-between mt-8">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -294,14 +233,14 @@ const Register = () => {
 
             <Link
               className="block w-full rounded px-12 py-3 text-sm font-medium text-purple-600  hover:text-purple-700 focus:outline-none focus:ring sm:w-auto"
-              to={`/register/staff`}
+              to="/register/"
             >
-              As Staff
+              Student
             </Link>
           </div>
           <div className="text-sm text-gray-500 text-center mt-8">
             Already have an account?{" "}
-            <Link className="text-violet-500" to={`/login?type=student`}>
+            <Link className="text-violet-500" to={`/login?type=staff`}>
               Login
             </Link>
           </div>
@@ -315,4 +254,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterStaff;

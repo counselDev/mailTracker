@@ -42,7 +42,7 @@ const StudentSchema = new mongoose.Schema(
       required: [true, "Please provide your entryYear"],
       minlength: 3,
     },
-    
+
     email: {
       type: String,
       required: [true, "Please provide email"],
@@ -58,6 +58,10 @@ const StudentSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
+    role: {
+      type: String,
+      default: "student",
+    },
   },
   { timestamps: true }
 );
@@ -70,7 +74,6 @@ StudentSchema.pre("save", async function () {
 
 //Instance mathod to create JWT
 StudentSchema.methods.createJWT = function () {
-
   return jwt.sign(
     { userId: this._id, role: this.role },
     process.env.JWT_SECRET,
@@ -86,6 +89,5 @@ StudentSchema.methods.comparePassword = async function (candidatePassword) {
 
   return isMatch;
 };
-
 
 export default mongoose.model("Student", StudentSchema);

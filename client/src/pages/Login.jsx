@@ -10,9 +10,9 @@ const Login = () => {
     clearMessage,
     handleFieldChange,
     whoIsLogging,
-    user
+    user,
   } = useAppContext();
-  console.log(errorMessage, "errorMessage");
+
   const navigate = useNavigate();
 
   const [loginParams, setLoginParams] = useSearchParams();
@@ -49,7 +49,9 @@ const Login = () => {
         <h3 className="mb-5 text-2xl font-semibold  text-gray-500 text-center">
           Welcome Back!
         </h3>
-        {whoIsLogging && <p className="text-center capitalize mb-4">For {whoIsLogging}</p>}
+        {whoIsLogging && (
+          <p className="text-center capitalize mb-4">For {whoIsLogging}</p>
+        )}
         {errorMessage ? (
           <div
             className="bg-red-100 border mb-4 border-red-400 text-red-700 px-4 py-2 rounded flex items-center justify-between gap-4"
@@ -130,6 +132,12 @@ const Login = () => {
               }`}
             >
               {whoIsLogging === "staff" ? "Student" : "Staff"}
+            </Link>
+          </div>
+          <div className="text-sm text-gray-500 text-center mt-8">
+            Dont Have an Account?{" "}
+            <Link className="text-violet-500" to={`/register?type=student`}>
+              Register
             </Link>
           </div>
         </form>

@@ -37,7 +37,7 @@ app.use(express.json());
 // ROUTES
 app.use("/api/auth/", authRouter);
 app.use("/api/staffs/", authMiddleWare, staffsRouter);
-app.use("/api/students/", authMiddleWare, studentsRouter);
+app.use("/api/students/", studentsRouter);
 app.use("/api/applications/",authMiddleWare, applicationRouter);
 
 app.get("*", (req, res) => {

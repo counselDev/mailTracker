@@ -24,14 +24,14 @@ const Landing = () => {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               className="block w-3/4 rounded bg-purple-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-purple-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-              to="/login?type=student"
+              to="/register?type=student"
             >
               Students
             </Link>
 
             <Link
               className="block w-3/4 rounded px-12 py-3 text-sm font-medium text-purple-600 shadow hover:text-purple-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto"
-              to="/login?type=staff"
+              to="/register/staff?type=staff"
             >
               Staffs
             </Link>

@@ -110,6 +110,43 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  const register = async (payload) => {
+    try {
+      dispatch({ type: ACTIONS.FETCH_START });
+      const res = await axios.post(
+        `/api/auth/register?${state.whoIsLogging}=1`,
+        payload
+      );
+      const { staff } = res.data;
+
+      dispatch({ type: ACTIONS.FETCH_STOP });
+      return staff;
+    } catch (error) {
+      dispatch({ type: ACTIONS.FETCH_STOP });
+      dispatch({
+        type: ACTIONS.SET_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
+  const registerStudent = async (payload) => {
+    try {
+      dispatch({ type: ACTIONS.FETCH_START });
+      const res = await axios.post(`/api/students/`, payload);
+      const { student } = res.data;
+
+      dispatch({ type: ACTIONS.FETCH_STOP });
+      return student;
+    } catch (error) {
+      dispatch({ type: ACTIONS.FETCH_STOP });
+      dispatch({
+        type: ACTIONS.SET_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
   const fetchStats = async (url) => {
     const { searchApplication } = state;
 
@@ -275,6 +312,8 @@ const AppContextProvider = ({ children }) => {
         ...state,
         dispatch,
         login,
+        register,
+        registerStudent,
         getStats,
         logout,
         getStaffs,
